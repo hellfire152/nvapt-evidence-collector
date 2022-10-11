@@ -130,4 +130,3 @@ dmypy.json
 
 # ignore local files 
 .DS_Store
-.env
