@@ -1,0 +1,18 @@
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-10-12 13:19 EDT
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000082s latency).
+
+PORT     STATE SERVICE
+5432/tcp open  postgresql
+| ssl-cert: Subject: commonName=postgresql
+| Subject Alternative Name: DNS:postgresql
+| Issuer: commonName=postgresql
+| Public Key type: rsa
+| Public Key bits: 4096
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-10-02T16:27:39
+| Not valid after:  2032-09-29T16:27:39
+| MD5:   f6c9 9ea7 cf39 eeed be19 a9cf 4e80 ce17
+|_SHA-1: c3bb 8649 e089 7bda e096 16e3 bf2f 0cb3 2cb5 cb2e
+
+Nmap done: 1 IP address (1 host up) scanned in 0.26 seconds
