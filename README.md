@@ -10,4 +10,4 @@ apt install python3.10-venv
 ## How to run
 1. Setup the environment with `bash setup.sh`
 1. Run the scan with the selected Nessus CSV report, `bash scan.sh ./sample/Nessus-CSV-Output.csv`.
-  * The commands' output can be found in the same directory where the Nessus CSV report lies, e.g. `./sample`. 
+    * The commands' output can be found in the same directory where the Nessus CSV report lies, e.g. `./sample/*.txt`. 
