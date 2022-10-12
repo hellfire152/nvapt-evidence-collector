@@ -1,15 +1,11 @@
 TCP:
-  443:
-    - XXX
-    - YYY
   22:
-    - XXX
-    - YYY
+    - "nmap -sV --script ssh2-enum-algos -p22 {%HOST%} > {%FOLDER%}/{%HOST%}-p22-nmap-ssh2-enum-algos.txt"
 
 UDP:
   53:
-    - XXX
-    - YYY
-  5353:
-    - XXX
-    - YYY
+    - "echo hello"
+
+TLS:
+  - "nmap -sV --script ssl-enum-ciphers -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-enum-ciphers.txt"
+  - "nmap -sV --script ssl-cert -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-cert.txt"
