@@ -4,5 +4,4 @@ echo 'Activating virtualenv'
 source venv/bin/activate
 
 # start zap scan
-# python3 scan.py ./samples/Nessus-Scan.csv
-python3 scan.py ./samples/test.csv
+python3 scan.py ./samples/Nessus-Scan.csv
