@@ -1,0 +1,12 @@
+TCP:
+  22:
+    - "nmap --script ssh2-enum-algos -p22 {%HOST%} > {%FOLDER%}/{%HOST%}-p22-nmap-ssh2-enum-algos.txt"
+
+UDP:
+  53:
+    - "echo hello"
+
+TLS:
+  - "sslscan --no-failed {%HOST%}:{%PORT%} > {%FOLDER%}/{%HOST%}-{%PORT%}-sslscan--no-failed.txt"
+  - "nmap --script ssl-enum-ciphers -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-enum-ciphers.txt"
+  - "nmap --script ssl-cert -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-cert.txt"
