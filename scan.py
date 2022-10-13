@@ -45,7 +45,8 @@ def vulns_scan(affected_services, commands, folder):
 def checkRunTimeInputs(input): 
   if len(input) != 2 :
     print('[-] ERROR: Missing input on Nessus CSV report.')
-    print('e.g. scan.py ./samples/Nessus-Scan.csv')
+    print('e.g. bash scan.sh ./samples/Nessus-Scan.csv')
+    print('e.g. python3 scan.py ./samples/Nessus-Scan.csv')
     sys.exit()
   checkFileExists(sys.argv[1])
 
@@ -86,7 +87,7 @@ def replaceIdentifiers(commands, host, port, folder):
 def runCommands(commands):
   for cmd in commands:
     print("[!] Running command: '{}'".format(cmd)) 
-    os.system(cmd)
+    os.system(cmd) # nosec B605
 
 # for reading nessus csv report and extract affected services, protocol:host:port:isTls
 # e.g. # ['tcp:127.0.0.1:3128:no', 'tcp:127.0.0.1:8834:yes']
