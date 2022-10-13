@@ -17,6 +17,12 @@ def vulns_scan(affected_services, commands, folder):
   for service in affected_services: 
     protocol, host, port, cipher = service.split(':')
     # print(protocol, host, port, cipher)
+    # extract TLS commands when affected service is found with ssl/tls
+    if (cipher == 'yes'):
+      for cmd in commands['TLS']:
+        updated_cmds = replaceIdentifiers(commands['TLS'], host, port, folder)
+        runCommands(updated_cmds)
+    # extract commands for TCP services 
     if str(protocol).lower() == 'tcp':
       # check whether the affected tcp service is open port
       if (checkOpenPort(host, port)):
@@ -25,11 +31,6 @@ def vulns_scan(affected_services, commands, folder):
         for cmd_port in commands['TCP']:
           if int(cmd_port) == int(port): 
             updated_cmds = replaceIdentifiers(commands['TCP'][int(cmd_port)], host, port, folder)
-            runCommands(updated_cmds)
-        # extract TLS commands when affected service is found with ssl/tls
-        if (cipher == 'yes'):
-          for cmd in commands['TLS']:
-            updated_cmds = replaceIdentifiers(commands['TLS'], host, port, folder)
             runCommands(updated_cmds)
       else:
         print("[-] ERROR: '{}:{}:{}' unreachable".format(protocol, host, port))
