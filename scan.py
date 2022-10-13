@@ -45,7 +45,8 @@ def vulns_scan(affected_services, commands, folder):
 def checkRunTimeInputs(input): 
   if len(input) != 2 :
     print('[-] ERROR: Missing input on Nessus CSV report.')
-    print('e.g. scan.py ./samples/Nessus-Scan.csv')
+    print('e.g. bash scan.sh ./samples/Nessus-Scan.csv')
+    print('e.g. python3 scan.py ./samples/Nessus-Scan.csv')
     sys.exit()
   checkFileExists(sys.argv[1])
 
