@@ -1,0 +1,6 @@
+[1m[34m[*][0m Spooling to file ./samples/127.0.0.1-8834-msf-auxiliary-scanner-http-cert.txt...
+[0m[1m[34m[*][0m 127.0.0.1:8834        - 127.0.0.1 - 'kali' : /O=Nessus Users United/OU=Nessus Certification Authority/L=New York/C=US/ST=NY/CN=Nessus Certification Authority
+[1m[34m[*][0m 127.0.0.1:8834        - 127.0.0.1 - 'kali' : '2022-10-05 14:23:24 UTC' - '2026-10-04 14:23:24 UTC'
+[1m[34m[*][0m 127.0.0.1:8834        - Scanned 1 of 1 hosts (100% complete)
+[1m[34m[*][0m Auxiliary module execution completed
+[0m
