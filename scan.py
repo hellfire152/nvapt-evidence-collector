@@ -17,11 +17,7 @@ def vulns_scan(affected_services, commands, folder):
   for service in affected_services: 
     protocol, host, port, cipher = service.split(':')
     # print(protocol, host, port, cipher)
-    # extract TLS commands when affected service is found with ssl/tls
-    if (cipher == 'yes'):
-      for cmd in commands['TLS']:
-        updated_cmds = replaceIdentifiers(commands['TLS'], host, port, folder)
-        runCommands(updated_cmds)
+    updated_cmds = []
     # extract commands for TCP services 
     if str(protocol).lower() == 'tcp':
       # check whether the affected tcp service is open port
@@ -31,7 +27,14 @@ def vulns_scan(affected_services, commands, folder):
         for cmd_port in commands['TCP']:
           if int(cmd_port) == int(port): 
             updated_cmds = replaceIdentifiers(commands['TCP'][int(cmd_port)], host, port, folder)
-            runCommands(updated_cmds)
+          # print(len(updated_cmds))
+          runCommands(updated_cmds)
+        # extract TLS commands when affected service is found with ssl/tls
+        if (cipher == 'yes'):
+          for cmd in commands['TLS']:
+            updated_cmds = replaceIdentifiers(commands['TLS'], host, port, folder)
+          # print(len(updated_cmds))
+          runCommands(updated_cmds)
       else:
         print("[-] ERROR: '{}:{}:{}' unreachable".format(protocol, host, port))
     # rest are UDP
@@ -40,7 +43,8 @@ def vulns_scan(affected_services, commands, folder):
       for cmd_port in commands['UDP']:
         if int(cmd_port) == int(port): 
           updated_cmds = replaceIdentifiers(commands['UDP'][int(cmd_port)], host, port, folder)
-          runCommands(updated_cmds)
+      # print(len(updated_cmds))
+      runCommands(updated_cmds)
 
 # other functions
 def checkRunTimeInputs(input): 
