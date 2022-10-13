@@ -87,7 +87,7 @@ def replaceIdentifiers(commands, host, port, folder):
 def runCommands(commands):
   for cmd in commands:
     print("[!] Running command: '{}'".format(cmd)) 
-    os.system(cmd)
+    os.system(cmd) # nosec B605
 
 # for reading nessus csv report and extract affected services, protocol:host:port:isTls
 # e.g. # ['tcp:127.0.0.1:3128:no', 'tcp:127.0.0.1:8834:yes']
