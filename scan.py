@@ -3,7 +3,7 @@ import os, sys, csv, yaml, socket
 from dotenv import load_dotenv
 
 def main():
-  load_dotenv() 
+  load_dotenv()
   checkRunTimeInputs(sys.argv)
   services = getAffectedServices(sys.argv[1])
   commands = getCommands(str(os.environ.get('COMMANDS_FILE')))
@@ -13,19 +13,19 @@ def main():
   # print(services, '\n', commands)
   # print(checkOpenPort('127.0.0.1', 80))
 
-def vulns_scan(affected_services, commands, folder): 
-  for service in affected_services: 
+def vulns_scan(affected_services, commands, folder):
+  for service in affected_services:
     protocol, host, port, cipher = service.split(':')
     # print(protocol, host, port, cipher)
     updated_cmds = []
-    # extract commands for TCP services 
+    # extract commands for TCP services
     if str(protocol).lower() == 'tcp':
       # check whether the affected tcp service is open port
       if (checkOpenPort(host, port)):
         print("[+] TCP: '{}:{}:{}' reachable!".format(protocol, host, port))
         # extract TCP commands when affected service port and commands' port match
         for cmd_port in commands['TCP']:
-          if int(cmd_port) == int(port): 
+          if int(cmd_port) == int(port):
             updated_cmds = replaceIdentifiers(commands['TCP'][int(cmd_port)], host, port, folder)
           # print(len(updated_cmds))
           runCommands(updated_cmds)
@@ -39,15 +39,15 @@ def vulns_scan(affected_services, commands, folder):
         print("[-] ERROR: '{}:{}:{}' unreachable".format(protocol, host, port))
     # rest are UDP
     else:
-      print("[+] UCP: '{}:{}:{}'".format(protocol, host, port)) 
+      print("[+] UCP: '{}:{}:{}'".format(protocol, host, port))
       for cmd_port in commands['UDP']:
-        if int(cmd_port) == int(port): 
+        if int(cmd_port) == int(port):
           updated_cmds = replaceIdentifiers(commands['UDP'][int(cmd_port)], host, port, folder)
       # print(len(updated_cmds))
       runCommands(updated_cmds)
 
 # other functions
-def checkRunTimeInputs(input): 
+def checkRunTimeInputs(input):
   if len(input) != 2 :
     print('[-] ERROR: Missing input on Nessus CSV report.')
     print('e.g. bash scan.sh ./samples/Nessus-Scan.csv')
@@ -57,10 +57,10 @@ def checkRunTimeInputs(input):
 
 def checkFileExists(file, exit=True):
 	check = True
-	if os.path.exists(file) == False: 
+	if os.path.exists(file) == False:
 		print("[-] ERROR: {} cannot be found".format(file))
 		check = False
-		if exit: sys.exit() 
+		if exit: sys.exit()
 	return check
 
 def checkOpenPort(host, port):
@@ -75,14 +75,14 @@ def checkOpenPort(host, port):
 def getCommands(yaml_file):
 	checkFileExists(yaml_file)
 	# loading scan setup vars from the supplied yaml file.
-	app_yaml_inputs = ""	
+	app_yaml_inputs = ""
 	with open(yaml_file, 'r') as stream:
 		app_yaml_inputs = yaml.safe_load(stream)
 	return app_yaml_inputs
 
 def replaceIdentifiers(commands, host, port, folder):
   updated_commands = []
-  for command in commands: 
+  for command in commands:
     temp_cmd = command.replace("{%HOST%}", host)
     temp_cmd = temp_cmd.replace("{%PORT%}", port)
     temp_cmd = temp_cmd.replace("{%FOLDER%}", folder)
@@ -91,7 +91,7 @@ def replaceIdentifiers(commands, host, port, folder):
 
 def runCommands(commands):
   for cmd in commands:
-    print("[!] Running command: '{}'".format(cmd)) 
+    print("[!] Running command: '{}'".format(cmd))
     os.system(cmd) # nosec B605
 
 # for reading nessus csv report and extract affected services, protocol:host:port:isTls
@@ -101,7 +101,7 @@ def getAffectedServices(input):
   return checkTls(unique_services, input)
 
 def checkTls(services, input):
-  for i in range(len(services)): 
+  for i in range(len(services)):
     protocol, host, port, cipher = services[i].split(':')
     with open(input) as csvfile:
       reader = csv.DictReader(csvfile)
@@ -123,7 +123,7 @@ def getUniqueServices(input):
         # service in tcp:127.0.0.1:3128:no
         service = "{}:{}:{}:no".format(row['Protocol'],row['Host'],row['Port'])
         # avoid adding duplicate
-        if service not in unique_services:    
+        if service not in unique_services:
           unique_services.append(service)
   # ['tcp:127.0.0.1:3128:', 'tcp:127.0.0.1:8834:']
   return unique_services
