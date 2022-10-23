@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, sys, csv, yaml, socket
+import os, sys, csv, yaml, socket, subprocess
 from dotenv import load_dotenv
 
 # replace ./samples/Nessus-Scan.csv to ./samples/Nessus-Scan.output
@@ -25,10 +25,11 @@ def printWithOutput(message):
   f.write(message + '\n')
 
 def getLocalSetups():
-  # get local ip
-  printWithOutput(str(os.system('ifconfig -a')))
-  printWithOutput(str(os.system('route')))
-  printWithOutput('\n\n')
+  # get local ip and setups
+  printWithOutput('### Local Setups\n')
+  printWithOutput((subprocess.check_output("ifconfig")).decode('utf-8'))
+  printWithOutput((subprocess.check_output("route")).decode('utf-8'))
+  printWithOutput('###\n\n')
 
 def vulnsScan(affected_services, commands, folder):
   for service in affected_services:
