@@ -14,7 +14,8 @@ def main():
   commands = getCommands(str(os.environ.get('COMMANDS_FILE')))
   outputs_folder = os.path.dirname(sys.argv[1]) # e.g. ./samples
 
-  vulns_scan(services, commands, outputs_folder)
+  getLocalSetups()
+  vulnsScan(services, commands, outputs_folder)
   # printWithOutput(services, '\n', commands)
   # printWithOutput(checkOpenPort('127.0.0.1', 80))
   f.close()
@@ -23,7 +24,13 @@ def printWithOutput(message):
   print(message)
   f.write(message + '\n')
 
-def vulns_scan(affected_services, commands, folder):
+def getLocalSetups():
+  # get local ip
+  printWithOutput(os.system('ifconfig -a'))
+  printWithOutput(os.system('route'))
+  printWithOutput(os.system('\n\n'))
+
+def vulnsScan(affected_services, commands, folder):
   for service in affected_services:
     protocol, host, port, cipher = service.split(':')
     # printWithOutput(protocol, host, port, cipher)
