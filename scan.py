@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
-import os, sys, csv, yaml, socket
+import os, sys, csv, yaml, socket, subprocess
 from dotenv import load_dotenv
+
+# replace ./samples/Nessus-Scan.csv to ./samples/Nessus-Scan.output
+input_file = str(sys.argv[1])
+output_file = input_file.replace('.csv', '.output')
+f = open(output_file,'w')
 
 def main():
   load_dotenv()
@@ -9,41 +14,54 @@ def main():
   commands = getCommands(str(os.environ.get('COMMANDS_FILE')))
   outputs_folder = os.path.dirname(sys.argv[1]) # e.g. ./samples
 
-  vulns_scan(services, commands, outputs_folder)
-  # print(services, '\n', commands)
-  # print(checkOpenPort('127.0.0.1', 80))
+  getLocalSetups()
+  vulnsScan(services, commands, outputs_folder)
+  # printWithOutput(services, '\n', commands)
+  # printWithOutput(checkOpenPort('127.0.0.1', 80))
+  f.close()
 
-def vulns_scan(affected_services, commands, folder):
+def printWithOutput(message):
+  print(message)
+  f.write(message + '\n')
+
+def getLocalSetups():
+  # get local ip and setups
+  printWithOutput('### Local Setups\n')
+  printWithOutput((subprocess.check_output("ifconfig")).decode('utf-8'))
+  printWithOutput((subprocess.check_output("route")).decode('utf-8'))
+  printWithOutput('###\n\n')
+
+def vulnsScan(affected_services, commands, folder):
   for service in affected_services:
     protocol, host, port, cipher = service.split(':')
-    # print(protocol, host, port, cipher)
+    # printWithOutput(protocol, host, port, cipher)
     updated_cmds = []
     # extract commands for TCP services
     if str(protocol).lower() == 'tcp':
       # check whether the affected tcp service is open port
       if (checkOpenPort(host, port)):
-        print("[+] TCP: '{}:{}:{}' reachable!".format(protocol, host, port))
+        printWithOutput("[+] TCP: '{}:{}:{}' reachable!".format(protocol, host, port))
         # extract TCP commands when affected service port and commands' port match
         for cmd_port in commands['TCP']:
           if int(cmd_port) == int(port):
             updated_cmds = replaceIdentifiers(commands['TCP'][int(cmd_port)], host, port, folder)
-          # print(len(updated_cmds))
+          # printWithOutput(len(updated_cmds))
           runCommands(updated_cmds)
         # extract TLS commands when affected service is found with ssl/tls
         if (cipher == 'yes'):
           for cmd in commands['TLS']:
             updated_cmds = replaceIdentifiers(commands['TLS'], host, port, folder)
-          # print(len(updated_cmds))
+          # printWithOutput(len(updated_cmds))
           runCommands(updated_cmds)
       else:
-        print("[-] ERROR: '{}:{}:{}' unreachable".format(protocol, host, port))
+        printWithOutput("[-] ERROR: '{}:{}:{}' unreachable".format(protocol, host, port))
     # rest are UDP
     else:
-      print("[+] UCP: '{}:{}:{}'".format(protocol, host, port))
+      printWithOutput("[+] UCP: '{}:{}:{}'".format(protocol, host, port))
       for cmd_port in commands['UDP']:
         if int(cmd_port) == int(port):
           updated_cmds = replaceIdentifiers(commands['UDP'][int(cmd_port)], host, port, folder)
-      # print(len(updated_cmds))
+      # printWithOutput(len(updated_cmds))
       runCommands(updated_cmds)
 
 # other functions
@@ -58,7 +76,7 @@ def checkRunTimeInputs(input):
 def checkFileExists(file, exit=True):
 	check = True
 	if os.path.exists(file) == False:
-		print("[-] ERROR: {} cannot be found".format(file))
+		printWithOutput("[-] ERROR: {} cannot be found".format(file))
 		check = False
 		if exit: sys.exit()
 	return check
@@ -91,8 +109,8 @@ def replaceIdentifiers(commands, host, port, folder):
 
 def runCommands(commands):
   for cmd in commands:
-    print("[!] Running command: '{}'".format(cmd))
-    os.system(cmd) # nosec B605
+    printWithOutput("[!] Running command: '{}'".format(cmd))
+    os.system(cmd)
 
 # for reading nessus csv report and extract affected services, protocol:host:port:isTls
 # e.g. # ['tcp:127.0.0.1:3128:no', 'tcp:127.0.0.1:8834:yes']

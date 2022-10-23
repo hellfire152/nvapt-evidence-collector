@@ -1,10 +1,20 @@
 TCP:
   22:
     - "nmap --script ssh2-enum-algos -p22 {%HOST%} > {%FOLDER%}/{%HOST%}-p22-nmap-ssh2-enum-algos.txt"
+  445:
+    - "nmap -–script smb2-security-mode -p445 {%HOST%} > {%FOLDER%}/{%HOST%}-p445-nmap-smb2-security-mode.txt"
+  3389:
+    - "nmap -–script rdp-ntlm-info -p3389 {%HOST%} > {%FOLDER%}/{%HOST%}-p3389-nmap-rdp-ntlm-info.txt"
+    - "nmap -–script rdp-enum-encryption -p3389 {%HOST%} > {%FOLDER%}/{%HOST%}-p3389-nmap-rdp-enum-encryption.txt"
 
+# as UDP is connectionless, connectivity check is not performed before executing the commands
 UDP:
-  53:
-    - "echo hello"
+  161:
+    - "nmap -sU -sV -p 161 -Pn {%HOST%} > {%FOLDER%}/{%HOST%}-p161-nmap.txt"
+  2638:
+    - "nmap -sU -p 2638 --script broadcast-sybase-asa-discover -Pn {%HOST%} > {%FOLDER%}/{%HOST%}-p2638-nmap-broadcast-sybase-asa-discover.txt"
+  5353:
+    - "nmap -sC -sU -p5353 -Pn {%HOST%} > {%FOLDER%}/{%HOST%}-p5353-nmap.txt"
 
 TLS:
   - "sslscan --no-failed {%HOST%}:{%PORT%} > {%FOLDER%}/{%HOST%}-{%PORT%}-sslscan--no-failed.txt"
