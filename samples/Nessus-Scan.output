@@ -1,0 +1,59 @@
+### Local Setups
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fe77:2925  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:77:29:25  txqueuelen 1000  (Ethernet)
+        RX packets 344  bytes 208996 (204.0 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 352  bytes 39857 (38.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 9  base 0xd020  
+
+eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.56.111  netmask 255.255.255.0  broadcast 192.168.56.255
+        inet6 fe80::223a:28b2:b4c9:95cd  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:31:34:f5  txqueuelen 1000  (Ethernet)
+        RX packets 3443  bytes 348573 (340.4 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 2613  bytes 519121 (506.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 11  base 0xd240  
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 14277  bytes 3397641 (3.2 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 14277  bytes 3397641 (3.2 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         10.0.2.2        0.0.0.0         UG    0      0        0 eth0
+10.0.2.0        0.0.0.0         255.255.255.0   U     0      0        0 eth0
+192.168.56.0    0.0.0.0         255.255.255.0   U     100    0        0 eth1
+
+###
+
+
+[+] TCP: 'tcp:127.0.0.1:3128' reachable!
+[+] TCP: 'tcp:127.0.0.1:8834' reachable!
+[!] Running command: 'sslscan --no-failed 127.0.0.1:8834 > ./samples/127.0.0.1-8834-sslscan--no-failed.txt'
+[!] Running command: 'nmap --script ssl-enum-ciphers -p 8834 127.0.0.1 > ./samples/127.0.0.1-8834-nmap-ssl-enum-ciphers.txt'
+[!] Running command: 'nmap --script ssl-cert -p 8834 127.0.0.1 > ./samples/127.0.0.1-8834-nmap-ssl-cert.txt'
+[!] Running command: 'msfconsole -q -x "use auxiliary/scanner/http/cert; set RHOSTS 127.0.0.1; set RPORT 8834; set SHOWALL true; spool ./samples/127.0.0.1-8834-msf-auxiliary-scanner-http-cert.txt; run; spool off; quit;"'
+[+] TCP: 'tcp:127.0.0.1:22' reachable!
+[!] Running command: 'nmap --script ssh2-enum-algos -p22 127.0.0.1 > ./samples/127.0.0.1-p22-nmap-ssh2-enum-algos.txt'
+[!] Running command: 'nmap --script ssh2-enum-algos -p22 127.0.0.1 > ./samples/127.0.0.1-p22-nmap-ssh2-enum-algos.txt'
+[!] Running command: 'nmap --script ssh2-enum-algos -p22 127.0.0.1 > ./samples/127.0.0.1-p22-nmap-ssh2-enum-algos.txt'
+[+] TCP: 'tcp:127.0.0.1:5901' reachable!
+[+] TCP: 'tcp:127.0.0.1:5432' reachable!
+[!] Running command: 'sslscan --no-failed 127.0.0.1:5432 > ./samples/127.0.0.1-5432-sslscan--no-failed.txt'
+[!] Running command: 'nmap --script ssl-enum-ciphers -p 5432 127.0.0.1 > ./samples/127.0.0.1-5432-nmap-ssl-enum-ciphers.txt'
+[!] Running command: 'nmap --script ssl-cert -p 5432 127.0.0.1 > ./samples/127.0.0.1-5432-nmap-ssl-cert.txt'
+[!] Running command: 'msfconsole -q -x "use auxiliary/scanner/http/cert; set RHOSTS 127.0.0.1; set RPORT 5432; set SHOWALL true; spool ./samples/127.0.0.1-5432-msf-auxiliary-scanner-http-cert.txt; run; spool off; quit;"'
+[+] UCP: 'udp:127.0.0.1:37689'
+[+] UCP: 'udp:127.0.0.1:50888'
