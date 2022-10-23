@@ -26,9 +26,9 @@ def printWithOutput(message):
 
 def getLocalSetups():
   # get local ip
-  printWithOutput(os.system('ifconfig -a'))
-  printWithOutput(os.system('route'))
-  printWithOutput(os.system('\n\n'))
+  printWithOutput(str(os.system('ifconfig -a')))
+  printWithOutput(str(os.system('route')))
+  printWithOutput('\n\n')
 
 def vulnsScan(affected_services, commands, folder):
   for service in affected_services:
