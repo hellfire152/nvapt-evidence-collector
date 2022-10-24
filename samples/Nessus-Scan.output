@@ -14,9 +14,9 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
         inet6 fe80::a00:27ff:fe77:2925  prefixlen 64  scopeid 0x20<link>
         ether 08:00:27:77:29:25  txqueuelen 1000  (Ethernet)
-        RX packets 213  bytes 177223 (173.0 KiB)
+        RX packets 304  bytes 198244 (193.5 KiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 206  bytes 23381 (22.8 KiB)
+        TX packets 295  bytes 38606 (37.7 KiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
         device interrupt 9  base 0xd020  
 
@@ -24,9 +24,9 @@ eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.56.111  netmask 255.255.255.0  broadcast 192.168.56.255
         inet6 fe80::223a:28b2:b4c9:95cd  prefixlen 64  scopeid 0x20<link>
         ether 08:00:27:31:34:f5  txqueuelen 1000  (Ethernet)
-        RX packets 27511  bytes 3641129 (3.4 MiB)
+        RX packets 28980  bytes 3789087 (3.6 MiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 21204  bytes 8142969 (7.7 MiB)
+        TX packets 22529  bytes 8411269 (8.0 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
         device interrupt 11  base 0xd240  
 
@@ -34,11 +34,17 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 42757  bytes 9798178 (9.3 MiB)
+        RX packets 49425  bytes 11468409 (10.9 MiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 42757  bytes 9798178 (9.3 MiB)
+        TX packets 49425  bytes 11468409 (10.9 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         10.0.2.2        0.0.0.0         UG    0      0        0 eth0
+10.0.2.0        0.0.0.0         255.255.255.0   U     0      0        0 eth0
+192.168.56.0    0.0.0.0         255.255.255.0   U     100    0        0 eth1
 
 ###
 

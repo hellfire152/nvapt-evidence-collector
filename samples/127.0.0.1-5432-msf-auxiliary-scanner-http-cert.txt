@@ -4,4 +4,7 @@
 [0m[1m[34m[*][0m Spooling to file ./samples/127.0.0.1-5432-msf-auxiliary-scanner-http-cert.txt...
 [0m[1m[34m[*][0m 127.0.0.1:5432        - Scanned 1 of 1 hosts (100% complete)
 [1m[34m[*][0m Auxiliary module execution completed
+[0m[1m[34m[*][0m Spooling to file ./samples/127.0.0.1-5432-msf-auxiliary-scanner-http-cert.txt...
+[0m[1m[34m[*][0m 127.0.0.1:5432        - Scanned 1 of 1 hosts (100% complete)
+[1m[34m[*][0m Auxiliary module execution completed
 [0m

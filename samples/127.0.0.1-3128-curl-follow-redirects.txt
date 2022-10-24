@@ -138,13 +138,13 @@ body
 <li><p>Illegal character in hostname; underscores are not allowed.</p></li>
 </ul>
 
-<p>Your cache administrator is <a href="mailto:webmaster?subject=CacheErrorInfo%20-%20ERR_INVALID_URL&amp;body=CacheHost%3A%20kali%0D%0AErrPage%3A%20ERR_INVALID_URL%0D%0AErr%3A%20%5Bnone%5D%0D%0ATimeStamp%3A%20Mon,%2024%20Oct%202022%2003%3A08%3A12%20GMT%0D%0A%0D%0AClientIP%3A%20127.0.0.1%0D%0A%0D%0AHTTP%20Request%3A%0D%0A%0D%0A%0D%0A">webmaster</a>.</p>
+<p>Your cache administrator is <a href="mailto:webmaster?subject=CacheErrorInfo%20-%20ERR_INVALID_URL&amp;body=CacheHost%3A%20kali%0D%0AErrPage%3A%20ERR_INVALID_URL%0D%0AErr%3A%20%5Bnone%5D%0D%0ATimeStamp%3A%20Mon,%2024%20Oct%202022%2003%3A12%3A36%20GMT%0D%0A%0D%0AClientIP%3A%20127.0.0.1%0D%0A%0D%0AHTTP%20Request%3A%0D%0A%0D%0A%0D%0A">webmaster</a>.</p>
 <br>
 </div>
 
 <hr>
 <div id="footer">
-<p>Generated Mon, 24 Oct 2022 03:08:12 GMT by kali (squid/5.6)</p>
+<p>Generated Mon, 24 Oct 2022 03:12:36 GMT by kali (squid/5.6)</p>
 <!-- ERR_INVALID_URL -->
 </div>
 </body></html>
