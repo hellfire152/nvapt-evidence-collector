@@ -32,7 +32,7 @@ def getLocalSetups():
   # get local ip and setups
   printWithOutput('\n### Local Setups\n')
   printWithOutput((subprocess.check_output("ifconfig")).decode('utf-8'))
-  # printWithOutput((subprocess.check_output("route")).decode('utf-8'))
+  printWithOutput((subprocess.check_output("route")).decode('utf-8'))
   printWithOutput('###\n\n')
 
 def vulnsScan(affected_services, commands, folder):
