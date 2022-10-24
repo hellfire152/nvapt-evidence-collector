@@ -21,7 +21,7 @@ TLS:
   - "sslscan --no-failed {%HOST%}:{%PORT%} > {%FOLDER%}/{%HOST%}-{%PORT%}-sslscan--no-failed.txt"
   - "nmap --script ssl-enum-ciphers -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-enum-ciphers.txt"
   - "nmap --script ssl-cert -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-cert.txt"
-  #- "msfconsole -q -x \"use auxiliary/scanner/http/cert; set RHOSTS {%HOST%}; set RPORT {%PORT%}; set SHOWALL true; spool {%FOLDER%}/{%HOST%}-{%PORT%}-msf-auxiliary-scanner-http-cert.txt; run; spool off; quit;\""
+  - "msfconsole -q -x \"use auxiliary/scanner/http/cert; set RHOSTS {%HOST%}; set RPORT {%PORT%}; set SHOWALL true; spool {%FOLDER%}/{%HOST%}-{%PORT%}-msf-auxiliary-scanner-http-cert.txt; run; spool off; quit;\""
 
 # when 'Plugin Output' found 'The remote web server type is'
 # all commands for web server assume HTTP instead
