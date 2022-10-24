@@ -16,8 +16,16 @@ UDP:
   5353:
     - "nmap -sC -sU -p5353 -Pn {%HOST%} > {%FOLDER%}/{%HOST%}-p5353-nmap.txt"
 
+# when 'Plugin Output' found 'cipher'
 TLS:
   - "sslscan --no-failed {%HOST%}:{%PORT%} > {%FOLDER%}/{%HOST%}-{%PORT%}-sslscan--no-failed.txt"
   - "nmap --script ssl-enum-ciphers -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-enum-ciphers.txt"
   - "nmap --script ssl-cert -p {%PORT%} {%HOST%} > {%FOLDER%}/{%HOST%}-{%PORT%}-nmap-ssl-cert.txt"
-  - "msfconsole -q -x \"use auxiliary/scanner/http/cert; set RHOSTS {%HOST%}; set RPORT {%PORT%}; set SHOWALL true; spool {%FOLDER%}/{%HOST%}-{%PORT%}-msf-auxiliary-scanner-http-cert.txt; run; spool off; quit;\""
+  #- "msfconsole -q -x \"use auxiliary/scanner/http/cert; set RHOSTS {%HOST%}; set RPORT {%PORT%}; set SHOWALL true; spool {%FOLDER%}/{%HOST%}-{%PORT%}-msf-auxiliary-scanner-http-cert.txt; run; spool off; quit;\""
+
+# when 'Plugin Output' found 'The remote web server type is'
+# all commands for web server assume HTTP instead
+# as the script will replace it to HTTPS if the affected service is found with TLS
+WEB:
+  - "curl -k -I http://{%HOST%}:{%PORT%}/ > {%FOLDER%}/{%HOST%}-{%PORT%}-curl-get-response-headers.txt"
+  - "curl -k -L http://{%HOST%}:{%PORT%}/ > {%FOLDER%}/{%HOST%}-{%PORT%}-curl-follow-redirects.txt"
