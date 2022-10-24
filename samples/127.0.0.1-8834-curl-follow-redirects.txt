@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-src https://store.tenable.com www.youtube.com; default-src 'self'; connect-src 'self' data.nessus-telemetry.tenable.com content.nessus-telemetry.tenable.com api.tenable.com; script-src 'self' content.nessus-telemetry.tenable.com; img-src 'self' data: data.nessus-telemetry.tenable.com content.nessus-telemetry.tenable.com pendo-static-5689996938182656.storage.googleapis.com s.ytimg.com i.ytimg.com; style-src 'self' content.nessus-telemetry.tenable.com data.nessus-telemetry.tenable.com pendo-static-5689996938182656.storage.googleapis.com; object-src 'none'; base-uri 'self';" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>Nessus</title>
+        <link rel="stylesheet" href="nessus6.css?v=1657464680868" id="theme-link" />
+        <link rel="stylesheet" href="tenable_links.css?v=ac05d80f1e3731b79d12103cdf9367fc" />
+        <link rel="stylesheet" href="wizard_templates.css?v=2d6c8fd0369d680a5f58b6331fd2c427" />
+        <!--[if lt IE 11]>
+            <script>
+                window.location = '/unsupported6.html';
+            </script>
+        <![endif]-->
+        <script src="nessus6.js?v=1657464680868"></script>
+        <script src="pendo-client.js"></script>
+    </head>
+    <body>
+    </body>
+</html>
