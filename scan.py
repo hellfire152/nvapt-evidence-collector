@@ -169,9 +169,7 @@ def checkIcmp(services, input):
       for row in reader:
         if row['Protocol'] == protocol and row['Host'] == host and row['Port'] == port:
           #ICMP Timestamp remote disclosure
-          print(row)
           if 'timestamp' in row['Name'].lower():
-            print("ESR")
             services[i] = f"{protocol}:{host}:13:no:no"
   return services
     
