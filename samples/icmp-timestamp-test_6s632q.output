@@ -1,0 +1,35 @@
+[+] '1' unique services found!
+protocol:host:port:isTls:isWeb
+icmp:192.168.161.21:13:no:no
+
+### Local Setups
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.161.160  netmask 255.255.255.0  broadcast 192.168.161.255
+        inet6 fe80::9334:b2d7:9009:5765  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:d2:26:79  txqueuelen 1000  (Ethernet)
+        RX packets 12375  bytes 6056789 (5.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 10763  bytes 1117999 (1.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 13820  bytes 6622655 (6.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 13820  bytes 6622655 (6.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         192.168.161.21  0.0.0.0         UG    100    0        0 eth0
+192.168.161.0   0.0.0.0         255.255.255.0   U     100    0        0 eth0
+
+###
+
+
+[+] ICMP: 192.168.161.21 Type:13
+[!] Running command: 'hping3 -c 5 --icmp --icmp-ts -V 192.168.161.21 > ./samples/192.168.161.21-icmp-timestamp.txt 2>/dev/null'

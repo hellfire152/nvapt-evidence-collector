@@ -1,0 +1,11 @@
+Plugin ID,CVE,CVSS v2.0 Base Score,Risk,Host,Protocol,Port,Name,Synopsis,Description,Solution,See Also,Plugin Output
+"10114","CVE-1999-0524","2.1","Low","192.168.161.21","icmp","0","ICMP Timestamp Request Remote Date Disclosure","It is possible to determine the exact time set on the remote host.","The remote host answers to an ICMP timestamp request.  This allows an
+attacker to know the date that is set on the targeted machine, which
+may assist an unauthenticated, remote attacker in defeating time-based
+authentication protocols.
+
+Timestamps returned from machines running Windows Vista / 7 / 2008 /
+2008 R2 are deliberately incorrect, but usually within 1000 seconds of
+the actual system time.","Filter out the ICMP timestamp requests (13), and the outgoing ICMP
+timestamp replies (14).","","The difference between the local and remote clocks is -3 seconds.
+"

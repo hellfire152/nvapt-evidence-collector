@@ -1,3 +1,7 @@
+ICMP:
+  13:
+    - "hping3 -c 5 --icmp --icmp-ts -V {%HOST%} > {%FOLDER%}/{%HOST%}-icmp-timestamp.txt 2>/dev/null"
+    
 TCP:
   22:
     - "nmap --script ssh2-enum-algos -p22 {%HOST%} > {%FOLDER%}/{%HOST%}-p22-nmap-ssh2-enum-algos.txt"

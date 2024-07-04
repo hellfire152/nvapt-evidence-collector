@@ -1,0 +1,27 @@
+using eth0, addr: 192.168.161.160, MTU: 1500
+HPING 192.168.161.21 (eth0 192.168.161.21): icmp mode set, 28 headers + 0 data bytes
+len=46 ip=192.168.161.21 ttl=64 id=60953 tos=0 iplen=40
+icmp_seq=0 rtt=12.8 ms
+ICMP timestamp: Originate=37337774 Receive=37339759 Transmit=37339759
+ICMP timestamp RTT tsrtt=13
+
+len=46 ip=192.168.161.21 ttl=64 id=61067 tos=0 iplen=40
+icmp_seq=1 rtt=12.5 ms
+ICMP timestamp: Originate=37338774 Receive=37340764 Transmit=37340764
+ICMP timestamp RTT tsrtt=12
+
+len=46 ip=192.168.161.21 ttl=64 id=61080 tos=0 iplen=40
+icmp_seq=2 rtt=11.2 ms
+ICMP timestamp: Originate=37339774 Receive=37341761 Transmit=37341761
+ICMP timestamp RTT tsrtt=12
+
+len=46 ip=192.168.161.21 ttl=64 id=61316 tos=0 iplen=40
+icmp_seq=3 rtt=10.7 ms
+ICMP timestamp: Originate=37340776 Receive=37342767 Transmit=37342767
+ICMP timestamp RTT tsrtt=10
+
+len=46 ip=192.168.161.21 ttl=64 id=61366 tos=0 iplen=40
+icmp_seq=4 rtt=9.7 ms
+ICMP timestamp: Originate=37341776 Receive=37343763 Transmit=37343763
+ICMP timestamp RTT tsrtt=10
+

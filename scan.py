@@ -68,14 +68,27 @@ def vulnsScan(affected_services, commands, folder):
           runCommands(updated_cmds)
       else:
         printWithOutput("[-] ERROR: '{}:{}:{}' unreachable".format(protocol, host, port))
-    # rest are UDP
-    else:
-      printWithOutput("[+] UCP: '{}:{}:{}'".format(protocol, host, port))
+    
+    # UDP commands
+    elif str(protocol).lower() == 'udp':
+      printWithOutput("[+] UDP: '{}:{}:{}'".format(protocol, host, port))
       for cmd_port in commands['UDP']:
         if int(cmd_port) == int(port):
           updated_cmds = replaceIdentifiers(commands['UDP'][int(cmd_port)], host, port, folder)
       # printWithOutput(len(updated_cmds))
       runCommands(updated_cmds)
+    
+    # ICMP Commands
+    elif str(protocol).lower() == 'icmp':
+      for icmp_type in commands['ICMP']:
+        # remote icmp timestamp disclosure
+        if int(icmp_type) == int(port): #port means icmp type in this case
+          printWithOutput(f"[+] ICMP: {host} Type:{icmp_type}")
+          updated_cmds = replaceIdentifiers(commands['ICMP'][int(icmp_type)], host, port, folder)
+      
+      runCommands(updated_cmds)
+          
+          
 
 # other functions
 def checkRunTimeInputs(input):
@@ -130,6 +143,7 @@ def runCommands(commands):
 def getAffectedServices(input):
   unique_services = getUniqueServices(input)
   unique_services = checkTls(unique_services, input)
+  unique_services = checkIcmp(unique_services, input)
   return checkWebServer(unique_services, input)
 
 def checkWebServer(services, input):
@@ -146,6 +160,21 @@ def checkWebServer(services, input):
   # ['tcp:127.0.0.1:3128:no:yes', 'tcp:127.0.0.1:8834:yes:yes']
   return services
 
+def checkIcmp(services, input):
+  for i in range(len(services)):
+    protocol, host, port, cipher, web = services[i].split(':')
+    
+    with open(input) as csvfile:
+      reader = csv.DictReader(csvfile)
+      for row in reader:
+        if row['Protocol'] == protocol and row['Host'] == host and row['Port'] == port:
+          #ICMP Timestamp remote disclosure
+          print(row)
+          if 'timestamp' in row['Name'].lower():
+            print("ESR")
+            services[i] = f"{protocol}:{host}:13:no:no"
+  return services
+    
 def checkTls(services, input):
   for i in range(len(services)):
     protocol, host, port, cipher, web = services[i].split(':')
@@ -170,6 +199,13 @@ def getUniqueServices(input):
         # service in tcp:127.0.0.1:3128:no:no (protocol:host:port:isTls:isWeb)
         service = "{}:{}:{}:no:no".format(row['Protocol'],row['Host'],row['Port'])
         # avoid adding duplicate
+        if service not in unique_services:
+          unique_services.append(service)
+          
+      # Port 0, likely ICMP
+      elif str(row['Protocol'].lower()) == 'icmp':
+        service = f"icmp:{row['Host']}:0:no:no"
+        
         if service not in unique_services:
           unique_services.append(service)
   # ['tcp:127.0.0.1:3128:', 'tcp:127.0.0.1:8834:']
