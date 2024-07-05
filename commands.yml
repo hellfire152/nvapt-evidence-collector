@@ -1,5 +1,6 @@
 ICMP:
-  13:
+  # numbers here are not ports, but the ICMP message type
+  13: # timestamp request
     - "hping3 -c 5 --icmp --icmp-ts -V {%HOST%} > {%FOLDER%}/{%HOST%}-icmp-timestamp.txt 2>/dev/null"
     
 TCP:
